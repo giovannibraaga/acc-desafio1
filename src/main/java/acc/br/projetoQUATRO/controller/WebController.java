@@ -45,7 +45,7 @@ public class WebController {
      *
      * @return A view "resultado"
      */
-    @DeleteMapping("/zerar")
+    @PutMapping("/zerar")
     public String zerar() {
         scoreService.zerarScore();
         return "resultado";
