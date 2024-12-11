@@ -12,6 +12,11 @@ public class ScoreService {
     @Autowired
     private ScoreRepository scoreRepository;
 
+    /**
+     * Tenta recuperar o score do repositório. Se não existir, cria um novo score com os valores zerados.
+     *
+     * @return o score recuperado ou criado
+     */
     @Transactional
     public Score score() {
         Score score;
@@ -24,6 +29,9 @@ public class ScoreService {
         return score;
     }
 
+    /**
+     * Zera o score do jogador.
+     * */
     @Transactional
     public void zerarScore() {
         Score score = scoreRepository.findById(1).get();
