@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>Resultados</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/resultado.css">
+</head>
+<body>
+<h1>Resultados dos jogos</h1>
+<div class="container">
+    <div class="message" id="message">
+        <h2>Você escolheu: <span th:text="${aEscolha}"></span></h2>
+        <h3>A sua escolha te gerou um(a): <span th:text="${saida}"></span></h3>
+    </div>
+
+    <h5>Tabela de Score:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Vitórias</th>
+            <th>Empates</th>
+            <th>Derrotas</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="vitorias"><span th:text="${vitorias}"></span></td>
+            <td id="empates"><span th:text="${empates}"></span></td>
+            <td id="derrotas"><span th:text="${derrotas}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="button">
+        <a href="/" class="btn-home">Jogar Novamente</a>
+        <a href="/" onclick="zerarResultados()" class="btn-restart">Reiniciar o Score do jogo</a>
+    </div>
+</div>
+</body>
+<script>
+    function zerarResultados() {
+        fetch("/zerar", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(response => response.json()).then(data => {
+            document.getElementById('vitorias').textContent = data.vitorias;
+            document.getElementById('empates').textContent = data.empates;
+            document.getElementById('derrotas').textContent = data.derrotas;
+
+            alert('Resultados zerados com sucesso!');
+        })
+    }
+</script>
+</html>
